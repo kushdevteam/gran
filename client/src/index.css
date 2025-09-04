@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(230, 25%, 6%);
+  --foreground: hsl(210, 40%, 98%);
+  --card: hsl(230, 25%, 8%);
+  --card-foreground: hsl(210, 40%, 95%);
+  --popover: hsl(230, 25%, 8%);
+  --popover-foreground: hsl(210, 40%, 95%);
+  --primary: hsl(210, 100%, 50%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(230, 25%, 12%);
+  --secondary-foreground: hsl(210, 40%, 90%);
+  --muted: hsl(230, 25%, 10%);
+  --muted-foreground: hsl(215, 20%, 65%);
+  --accent: hsl(210, 100%, 75%);
+  --accent-foreground: hsl(230, 25%, 6%);
+  --destructive: hsl(0, 62%, 50%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --border: hsl(230, 25%, 12%);
+  --input: hsl(230, 25%, 10%);
+  --ring: hsl(210, 100%, 50%);
+  --grok: hsl(210, 100%, 50%);
+  --grok-foreground: hsl(0, 0%, 100%);
+  --grok-muted: hsl(210, 100%, 75%);
+  --ani: hsl(320, 100%, 70%);
+  --ani-foreground: hsl(0, 0%, 100%);
+  --ani-muted: hsl(320, 100%, 85%);
+  --chart-1: hsl(203.8863, 88.2845%, 53.1373%);
+  --chart-2: hsl(159.7826, 100%, 36.0784%);
+  --chart-3: hsl(42.0290, 92.8251%, 56.2745%);
+  --chart-4: hsl(147.1429, 78.5047%, 41.9608%);
+  --chart-5: hsl(341.4894, 75.2000%, 50.9804%);
+  --sidebar: hsl(230, 25%, 8%);
+  --sidebar-foreground: hsl(210, 40%, 95%);
+  --sidebar-primary: hsl(210, 100%, 50%);
+  --sidebar-primary-foreground: hsl(0, 0%, 100%);
+  --sidebar-accent: hsl(210, 100%, 75%);
+  --sidebar-accent-foreground: hsl(230, 25%, 6%);
+  --sidebar-border: hsl(230, 25%, 12%);
+  --sidebar-ring: hsl(210, 100%, 50%);
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: JetBrains Mono, monospace;
+  --font-orbitron: Orbitron, sans-serif;
+  --radius: 0.75rem;
+  --shadow-2xs: 0px 2px 0px 0px hsl(210, 100%, 50%, 0.05);
+  --shadow-xs: 0px 2px 0px 0px hsl(210, 100%, 50%, 0.05);
+  --shadow-sm: 0px 2px 0px 0px hsl(210, 100%, 50%, 0.05), 0px 1px 2px -1px hsl(210, 100%, 50%, 0.1);
+  --shadow: 0px 2px 0px 0px hsl(210, 100%, 50%, 0.05), 0px 1px 2px -1px hsl(210, 100%, 50%, 0.1);
+  --shadow-md: 0px 2px 0px 0px hsl(210, 100%, 50%, 0.05), 0px 2px 4px -1px hsl(210, 100%, 50%, 0.15);
+  --shadow-lg: 0px 2px 0px 0px hsl(210, 100%, 50%, 0.05), 0px 4px 6px -1px hsl(210, 100%, 50%, 0.2);
+  --shadow-xl: 0px 2px 0px 0px hsl(210, 100%, 50%, 0.05), 0px 8px 10px -1px hsl(210, 100%, 50%, 0.25);
+  --shadow-2xl: 0px 2px 0px 0px hsl(210, 100%, 50%, 0.1);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+}
+
+.dark {
+  --background: hsl(230, 25%, 6%);
+  --foreground: hsl(210, 40%, 98%);
+  --card: hsl(230, 25%, 8%);
+  --card-foreground: hsl(210, 40%, 95%);
+  --popover: hsl(230, 25%, 8%);
+  --popover-foreground: hsl(210, 40%, 95%);
+  --primary: hsl(210, 100%, 50%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(230, 25%, 12%);
+  --secondary-foreground: hsl(210, 40%, 90%);
+  --muted: hsl(230, 25%, 10%);
+  --muted-foreground: hsl(215, 20%, 65%);
+  --accent: hsl(210, 100%, 75%);
+  --accent-foreground: hsl(230, 25%, 6%);
+  --destructive: hsl(0, 62%, 50%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --border: hsl(230, 25%, 12%);
+  --input: hsl(230, 25%, 10%);
+  --ring: hsl(210, 100%, 50%);
+  --grok: hsl(210, 100%, 50%);
+  --grok-foreground: hsl(0, 0%, 100%);
+  --grok-muted: hsl(210, 100%, 75%);
+  --ani: hsl(320, 100%, 70%);
+  --ani-foreground: hsl(0, 0%, 100%);
+  --ani-muted: hsl(320, 100%, 85%);
+  --chart-1: hsl(203.8863, 88.2845%, 53.1373%);
+  --chart-2: hsl(159.7826, 100%, 36.0784%);
+  --chart-3: hsl(42.0290, 92.8251%, 56.2745%);
+  --chart-4: hsl(147.1429, 78.5047%, 41.9608%);
+  --chart-5: hsl(341.4894, 75.2000%, 50.9804%);
+  --sidebar: hsl(230, 25%, 8%);
+  --sidebar-foreground: hsl(210, 40%, 95%);
+  --sidebar-primary: hsl(210, 100%, 50%);
+  --sidebar-primary-foreground: hsl(0, 0%, 100%);
+  --sidebar-accent: hsl(210, 100%, 75%);
+  --sidebar-accent-foreground: hsl(230, 25%, 6%);
+  --sidebar-border: hsl(230, 25%, 12%);
+  --sidebar-ring: hsl(210, 100%, 50%);
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: JetBrains Mono, monospace;
+  --font-orbitron: Orbitron, sans-serif;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  .font-orbitron {
+    font-family: var(--font-orbitron);
+  }
+}
+
+@layer utilities {
+  .glow-grok {
+    box-shadow: 0 0 20px rgba(0, 119, 255, 0.3);
+  }
+
+  .glow-ani {
+    box-shadow: 0 0 20px rgba(255, 102, 204, 0.3);
+  }
+
+  .gradient-grok {
+    background: linear-gradient(135deg, hsl(210, 100%, 50%), hsl(210, 100%, 75%));
+  }
+
+  .gradient-ani {
+    background: linear-gradient(135deg, hsl(320, 100%, 70%), hsl(320, 100%, 85%));
+  }
+
+  .faction-grok {
+    border-color: var(--grok);
+    background: linear-gradient(135deg, rgba(0, 119, 255, 0.1), rgba(0, 212, 255, 0.05));
+  }
+
+  .faction-ani {
+    border-color: var(--ani);
+    background: linear-gradient(135deg, rgba(255, 102, 204, 0.1), rgba(255, 153, 230, 0.05));
+  }
+
+  @keyframes glow-pulse {
+    0% { box-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary), 0 0 15px var(--primary); }
+    100% { box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 30px var(--primary); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite alternate;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+}
+
+/* Telegram WebApp Safe Areas */
+.pt-safe-area-inset-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.pb-safe-area-inset-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Mobile touch optimization */
+@media (hover: none) and (pointer: coarse) {
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Better touch targets */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve scrolling performance */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Enhanced mobile navigation */
+@media (max-width: 768px) {
+  /* Ensure bottom navigation doesn't overlap with Telegram UI */
+  .mobile-bottom-nav {
+    z-index: 999;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  
+  /* Optimized tap targets for mobile */
+  .nav-item-mobile {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Mobile-first responsive navigation */
+  .mobile-nav-card {
+    @apply p-2 rounded-lg transition-all touch-manipulation;
+    min-height: 52px;
+    min-width: 52px;
+  }
+}

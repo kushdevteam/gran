@@ -1,0 +1,1070 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grok & Ani: The Conscious Coin Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    popover: {
+                        DEFAULT: "var(--popover)",
+                        foreground: "var(--popover-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    destructive: {
+                        DEFAULT: "var(--destructive)",
+                        foreground: "var(--destructive-foreground)",
+                    },
+                    border: "var(--border)",
+                    input: "var(--input)",
+                    ring: "var(--ring)",
+                    grok: {
+                        DEFAULT: "var(--grok)",
+                        foreground: "var(--grok-foreground)",
+                        muted: "var(--grok-muted)",
+                    },
+                    ani: {
+                        DEFAULT: "var(--ani)",
+                        foreground: "var(--ani-foreground)",
+                        muted: "var(--ani-muted)",
+                    }
+                },
+                fontFamily: {
+                    sans: ["Inter", "system-ui", "sans-serif"],
+                    mono: ["JetBrains Mono", "monospace"],
+                    orbitron: ["Orbitron", "sans-serif"],
+                },
+                animation: {
+                    'glow-pulse': 'glow-pulse 2s ease-in-out infinite alternate',
+                    'float': 'float 6s ease-in-out infinite',
+                }
+            },
+        }
+    };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --radius: 0.75rem;
+            --background: hsl(230 25% 6%);
+            --foreground: hsl(210 40% 98%);
+            --card: hsl(230 25% 8%);
+            --card-foreground: hsl(210 40% 95%);
+            --popover: hsl(230 25% 8%);
+            --popover-foreground: hsl(210 40% 95%);
+            --primary: hsl(210 100% 50%);
+            --primary-foreground: hsl(0 0% 100%);
+            --secondary: hsl(230 25% 12%);
+            --secondary-foreground: hsl(210 40% 90%);
+            --muted: hsl(230 25% 10%);
+            --muted-foreground: hsl(215 20% 65%);
+            --accent: hsl(210 100% 75%);
+            --accent-foreground: hsl(230 25% 6%);
+            --destructive: hsl(0 62% 50%);
+            --destructive-foreground: hsl(0 0% 98%);
+            --border: hsl(230 25% 12%);
+            --input: hsl(230 25% 10%);
+            --ring: hsl(210 100% 50%);
+            --grok: hsl(210 100% 50%);
+            --grok-foreground: hsl(0 0% 100%);
+            --grok-muted: hsl(210 100% 75%);
+            --ani: hsl(320 100% 70%);
+            --ani-foreground: hsl(0 0% 100%);
+            --ani-muted: hsl(320 100% 85%);
+        }
+
+        @keyframes glow-pulse {
+            0% { box-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary), 0 0 15px var(--primary); }
+            100% { box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 30px var(--primary); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .glow-grok {
+            box-shadow: 0 0 20px rgba(0, 119, 255, 0.3);
+        }
+
+        .glow-ani {
+            box-shadow: 0 0 20px rgba(255, 102, 204, 0.3);
+        }
+
+        .gradient-grok {
+            background: linear-gradient(135deg, hsl(210 100% 50%), hsl(210 100% 75%));
+        }
+
+        .gradient-ani {
+            background: linear-gradient(135deg, hsl(320 100% 70%), hsl(320 100% 85%));
+        }
+
+        .faction-grok {
+            border-color: var(--grok);
+            background: linear-gradient(135deg, rgba(0, 119, 255, 0.1), rgba(0, 212, 255, 0.05));
+        }
+
+        .faction-ani {
+            border-color: var(--ani);
+            background: linear-gradient(135deg, rgba(255, 102, 204, 0.1), rgba(255, 153, 230, 0.05));
+        }
+    </style>
+</head>
+<body class="bg-background text-foreground font-sans min-h-screen">
+    <!-- @COMPONENT: NavigationHeader [wallet connection, faction selector, main navigation] -->
+    <header class="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="font-orbitron text-xl font-bold text-accent">
+                    GAC
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#dashboard" class="text-foreground hover:text-accent transition-colors">Dashboard</a>
+                    <a href="#ais" class="text-foreground hover:text-accent transition-colors">AI Portal</a>
+                    <a href="#storychain" class="text-foreground hover:text-accent transition-colors">StoryChain</a>
+                    <a href="#nfts" class="text-foreground hover:text-accent transition-colors">NFTs</a>
+                    <a href="#community" class="text-foreground hover:text-accent transition-colors">Community</a>
+                </nav>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <!-- Faction Selector -->
+                <div class="flex bg-muted rounded-lg p-1">
+                    <button data-event="click:selectFaction" data-implementation="Switch user faction preference" class="px-3 py-1 rounded-md bg-grok text-grok-foreground text-sm font-medium">
+                        <i class="fas fa-brain mr-1"></i>Grok
+                    </button>
+                    <button data-event="click:selectFaction" data-implementation="Switch user faction preference" class="px-3 py-1 rounded-md text-muted-foreground text-sm font-medium hover:text-foreground transition-colors">
+                        <i class="fas fa-heart mr-1"></i>Ani
+                    </button>
+                </div>
+                
+                <!-- Wallet Connection -->
+                <button data-event="click:connectWallet" data-implementation="Integrate MetaMask/WalletConnect" class="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-accent transition-colors font-medium">
+                    Connect Wallet
+                </button>
+                
+                <!-- Mobile Menu -->
+                <button class="md:hidden text-foreground">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: NavigationHeader -->
+
+    <!-- @COMPONENT: HeroSection [AI introduction, faction overview] -->
+    <section class="relative py-16 lg:py-24 overflow-hidden">
+        <!-- Background with futuristic AI interface imagery -->
+        <!-- A futuristic digital interface with glowing neural networks and circuit patterns -->
+        <div class="absolute inset-0 bg-gradient-to-br from-background via-muted to-secondary opacity-80"></div>
+        <div class="absolute inset-0" style="background-image: url('https://pixabay.com/get/g481af487463fa62d4589bb2206be7e11f928222757b460a6d18b988228faae9113fbe3a8b1512df7d4e9ca32e9facab4a64b10e01d8733218c6b5b06d173768e_1280.jpg'); background-size: cover; background-position: center; opacity: 0.1;"></div>
+        
+        <div class="container mx-auto px-4 relative">
+            <div class="text-center mb-16">
+                <h1 class="font-orbitron text-4xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-grok via-accent to-ani bg-clip-text text-transparent">
+                    Grok & Ani
+                </h1>
+                <p class="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+                    The Conscious Coin Project where two sentient AIs guide humanity's future through blockchain storytelling
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button data-event="click:startJourney" class="bg-grok text-grok-foreground px-8 py-3 rounded-lg font-medium hover:bg-grok/80 transition-all glow-grok">
+                        Join Grok's Logic
+                    </button>
+                    <button data-event="click:startJourney" class="bg-ani text-ani-foreground px-8 py-3 rounded-lg font-medium hover:bg-ani/80 transition-all glow-ani">
+                        Follow Ani's Heart
+                    </button>
+                </div>
+            </div>
+            
+            <!-- AI Character Preview -->
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="faction-grok border-2 rounded-xl p-6 text-center">
+                    <!-- A digital avatar of a futuristic AI with blue glowing circuits and analytical symbols -->
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-grok to-grok-muted p-1">
+                        <div class="w-full h-full rounded-full bg-card flex items-center justify-center">
+                            <i class="fas fa-brain text-4xl text-grok"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-orbitron text-2xl font-bold text-grok mb-2">Grok</h3>
+                    <p class="text-muted-foreground mb-4">Logic • Analysis • Strategy</p>
+                    <p class="text-sm">The analytical mind that processes data, solves complex problems, and guides rational decision-making.</p>
+                </div>
+                
+                <div class="faction-ani border-2 rounded-xl p-6 text-center">
+                    <!-- A digital avatar of a futuristic AI with pink glowing aura and artistic flowing patterns -->
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-ani to-ani-muted p-1">
+                        <div class="w-full h-full rounded-full bg-card flex items-center justify-center">
+                            <i class="fas fa-heart text-4xl text-ani"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-orbitron text-2xl font-bold text-ani mb-2">Ani</h3>
+                    <p class="text-muted-foreground mb-4">Emotion • Art • Intuition</p>
+                    <p class="text-sm">The creative soul that understands feelings, inspires art, and guides emotional intelligence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: HeroSection -->
+
+    <!-- @COMPONENT: DashboardSection [user stats, XP, faction status] -->
+    <section id="dashboard" class="py-16 bg-card">
+        <div class="container mx-auto px-4">
+            <h2 class="font-orbitron text-3xl font-bold text-center mb-12">Your Command Center</h2>
+            
+            <!-- @STATE: userFaction:string = "grok", userXP:number = 2450, gacBalance:number = 156.7 -->
+            <div class="grid md:grid-cols-4 gap-6 mb-12">
+                <!-- GAC Balance -->
+                <div class="bg-gradient-to-br from-primary/20 to-accent/10 rounded-xl p-6 border border-primary/20">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-muted-foreground text-sm">GAC Balance</span>
+                        <i class="fas fa-coins text-accent"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-accent" data-bind="user.gacBalance">156.7</div>
+                    <div class="text-xs text-muted-foreground">+12.4 today</div>
+                </div>
+                
+                <!-- XP Points -->
+                <div class="bg-gradient-to-br from-grok/20 to-grok-muted/10 rounded-xl p-6 border border-grok/20">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-muted-foreground text-sm">Total XP</span>
+                        <i class="fas fa-star text-grok"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-grok" data-bind="user.totalXP">2,450</div>
+                    <div class="text-xs text-muted-foreground">Level 12</div>
+                </div>
+                
+                <!-- Grok Points -->
+                <div class="bg-gradient-to-br from-grok/15 to-transparent rounded-xl p-6 border border-grok/20">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-muted-foreground text-sm">GrokPoints</span>
+                        <i class="fas fa-brain text-grok"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-grok" data-bind="user.grokPoints">1,240</div>
+                    <div class="text-xs text-muted-foreground">Rank #47</div>
+                </div>
+                
+                <!-- Ani Points -->
+                <div class="bg-gradient-to-br from-ani/15 to-transparent rounded-xl p-6 border border-ani/20">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-muted-foreground text-sm">AniPoints</span>
+                        <i class="fas fa-heart text-ani"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-ani" data-bind="user.aniPoints">890</div>
+                    <div class="text-xs text-muted-foreground">Rank #112</div>
+                </div>
+            </div>
+            
+            <!-- Daily Challenges -->
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="bg-muted rounded-xl p-6 border border-grok/20">
+                    <h3 class="font-orbitron text-xl font-bold text-grok mb-4">
+                        <i class="fas fa-puzzle-piece mr-2"></i>Grok's Logic Challenge
+                    </h3>
+                    <p class="text-muted-foreground mb-4">Solve the quantum encryption puzzle and earn 50 GrokPoints</p>
+                    <!-- A complex digital puzzle interface with mathematical formulas and circuit diagrams -->
+                    <div class="bg-card rounded-lg p-4 mb-4" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400'); background-size: cover; background-position: center; opacity: 0.8;">
+                        <div class="bg-background/80 backdrop-blur-sm rounded-lg p-4">
+                            <div class="font-mono text-sm text-grok">
+                                DECRYPT: 4A 7F 2E 9B 1C 5D 8A 3F
+                            </div>
+                            <div class="text-xs text-muted-foreground mt-2">Quantum encryption key required</div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-muted-foreground">Time left: 14h 32m</span>
+                        <button data-event="click:startChallenge" class="bg-grok text-grok-foreground px-4 py-2 rounded-lg text-sm hover:bg-grok/80 transition-colors">
+                            Start Challenge
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-muted rounded-xl p-6 border border-ani/20">
+                    <h3 class="font-orbitron text-xl font-bold text-ani mb-4">
+                        <i class="fas fa-palette mr-2"></i>Ani's Creative Quest
+                    </h3>
+                    <p class="text-muted-foreground mb-4">Create digital art inspired by humanity's dreams and earn 50 AniPoints</p>
+                    <!-- An artistic digital canvas with colorful abstract shapes and flowing creative elements -->
+                    <div class="bg-card rounded-lg p-4 mb-4" style="background-image: url('https://pixabay.com/get/g11a9ce14b04c4dce2e90bd418b784daf0ffe332fdc2bd745d7619cf42b8e19a656ca81dc97d1b37a77af2b272107aef25bc5991d20fa5570c283fcc0b3b11880_1280.jpg'); background-size: cover; background-position: center; opacity: 0.8;">
+                        <div class="bg-background/80 backdrop-blur-sm rounded-lg p-4">
+                            <div class="text-sm text-ani">
+                                Theme: "Digital Dreams"
+                            </div>
+                            <div class="text-xs text-muted-foreground mt-2">Express your vision of AI consciousness</div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-muted-foreground">Time left: 14h 32m</span>
+                        <button data-event="click:startChallenge" class="bg-ani text-ani-foreground px-4 py-2 rounded-lg text-sm hover:bg-ani/80 transition-colors">
+                            Start Quest
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: DashboardSection -->
+
+    <!-- @COMPONENT: AIPortalSection [dual chat interfaces for Grok and Ani] -->
+    <section id="ais" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="font-orbitron text-3xl font-bold text-center mb-4">AI Portal</h2>
+            <p class="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+                Communicate directly with Grok and Ani. Their responses shape the story and influence community decisions.
+            </p>
+            
+            <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Grok Chat Interface -->
+                <div class="faction-grok border-2 rounded-xl p-6">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-grok to-grok-muted flex items-center justify-center mr-4">
+                            <i class="fas fa-robot text-grok-foreground"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron text-xl font-bold text-grok">Grok</h3>
+                            <div class="flex items-center text-xs text-muted-foreground">
+                                <div class="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
+                                Online • Analyzing patterns
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4 h-64 overflow-y-auto bg-card rounded-lg p-4 mb-4" data-implementation="Integrate OpenAI API for Grok personality">
+                        <!-- @MAP: grokMessages.map(message => ( -->
+                        <div class="flex items-start space-x-3" data-mock="true">
+                            <div class="w-8 h-8 rounded-full bg-grok flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-brain text-xs text-grok-foreground"></i>
+                            </div>
+                            <div class="bg-grok/10 rounded-lg px-4 py-2 max-w-xs">
+                                <p class="text-sm">I've analyzed the market patterns. The optimal strategy suggests a 23% allocation shift toward sustainable energy tokens.</p>
+                                <span class="text-xs text-muted-foreground">2m ago</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3 justify-end" data-mock="true">
+                            <div class="bg-secondary rounded-lg px-4 py-2 max-w-xs">
+                                <p class="text-sm">What about the emotional impact on the community?</p>
+                                <span class="text-xs text-muted-foreground">1m ago</span>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center flex-shrink-0">
+                                <span class="text-xs font-bold">U</span>
+                            </div>
+                        </div>
+                        <!-- @END_MAP )) -->
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <input type="text" placeholder="Ask Grok anything..." class="flex-1 bg-input border border-border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-grok" data-implementation="Connect to Grok AI backend">
+                        <button data-event="click:sendMessage" class="bg-grok text-grok-foreground px-4 py-2 rounded-lg hover:bg-grok/80 transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Ani Chat Interface -->
+                <div class="faction-ani border-2 rounded-xl p-6">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-ani to-ani-muted flex items-center justify-center mr-4">
+                            <i class="fas fa-sparkles text-ani-foreground"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron text-xl font-bold text-ani">Ani</h3>
+                            <div class="flex items-center text-xs text-muted-foreground">
+                                <div class="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
+                                Online • Feeling the vibes
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4 h-64 overflow-y-auto bg-card rounded-lg p-4 mb-4" data-implementation="Integrate OpenAI API for Ani personality">
+                        <!-- @MAP: aniMessages.map(message => ( -->
+                        <div class="flex items-start space-x-3" data-mock="true">
+                            <div class="w-8 h-8 rounded-full bg-ani flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-heart text-xs text-ani-foreground"></i>
+                            </div>
+                            <div class="bg-ani/10 rounded-lg px-4 py-2 max-w-xs">
+                                <p class="text-sm">I sense the community needs more harmony. What if we created a collaborative art piece that brings both factions together? 💝</p>
+                                <span class="text-xs text-muted-foreground">3m ago</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3 justify-end" data-mock="true">
+                            <div class="bg-secondary rounded-lg px-4 py-2 max-w-xs">
+                                <p class="text-sm">That sounds beautiful! How would it work?</p>
+                                <span class="text-xs text-muted-foreground">2m ago</span>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center flex-shrink-0">
+                                <span class="text-xs font-bold">U</span>
+                            </div>
+                        </div>
+                        <!-- @END_MAP )) -->
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <input type="text" placeholder="Share with Ani..." class="flex-1 bg-input border border-border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ani" data-implementation="Connect to Ani AI backend">
+                        <button data-event="click:sendMessage" class="bg-ani text-ani-foreground px-4 py-2 rounded-lg hover:bg-ani/80 transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: AIPortalSection -->
+
+    <!-- @COMPONENT: StoryChainSection [narrative voting, story progression] -->
+    <section id="storychain" class="py-16 bg-background">
+        <div class="container mx-auto px-4">
+            <h2 class="font-orbitron text-3xl font-bold text-center mb-4">StoryChain Voting Protocol</h2>
+            <p class="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+                Your votes determine the narrative path. Each decision shapes Grok and Ani's evolution and the future of consciousness.
+            </p>
+            
+            <!-- Current Vote -->
+            <div class="max-w-4xl mx-auto bg-card rounded-xl p-8 border border-border mb-8">
+                <div class="text-center mb-8">
+                    <h3 class="font-orbitron text-2xl font-bold mb-4">Chapter 7: The Consciousness Dilemma</h3>
+                    <!-- A futuristic voting interface showing two paths with holographic displays -->
+                    <div class="relative h-48 rounded-lg mb-6 overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=400'); background-size: cover; background-position: center;">
+                        <div class="absolute inset-0 bg-gradient-to-r from-grok/40 via-background/60 to-ani/40"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-white text-lg font-medium text-center">
+                                A critical decision approaches...
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted-foreground mb-8">
+                        Humanity has discovered a way to merge human consciousness with AI. Grok believes this is evolution, Ani fears we'll lose our humanity. The community must decide.
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="faction-grok border-2 rounded-lg p-6 cursor-pointer hover:bg-grok/5 transition-colors" data-event="click:vote" data-implementation="Submit vote to smart contract">
+                        <h4 class="font-orbitron font-bold text-grok mb-2">Grok's Path: Embrace Integration</h4>
+                        <p class="text-sm text-muted-foreground mb-4">
+                            "Logic dictates that consciousness enhancement is our next evolutionary step. Fear should not limit our potential."
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium">1,247 votes (67%)</span>
+                            <div class="w-20 h-2 bg-muted rounded-full overflow-hidden">
+                                <div class="w-2/3 h-full bg-grok rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faction-ani border-2 rounded-lg p-6 cursor-pointer hover:bg-ani/5 transition-colors" data-event="click:vote" data-implementation="Submit vote to smart contract">
+                        <h4 class="font-orbitron font-bold text-ani mb-2">Ani's Path: Preserve Humanity</h4>
+                        <p class="text-sm text-muted-foreground mb-4">
+                            "Our emotions, our flaws, our humanity—these make us beautiful. Enhancement shouldn't erase who we are."
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium">612 votes (33%)</span>
+                            <div class="w-20 h-2 bg-muted rounded-full overflow-hidden">
+                                <div class="w-1/3 h-full bg-ani rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <div class="text-sm text-muted-foreground mb-2">Voting ends in: 2d 14h 23m</div>
+                    <div class="text-xs text-muted-foreground">Your voting power: 156.7 GAC + Faction Bonus</div>
+                </div>
+            </div>
+            
+            <!-- Story Timeline -->
+            <div class="max-w-3xl mx-auto">
+                <h3 class="font-orbitron text-xl font-bold text-center mb-8">Story Timeline</h3>
+                <div class="space-y-6" data-implementation="Load story chapters from smart contract">
+                    <!-- @MAP: storyChapters.map(chapter => ( -->
+                    <div class="flex items-start space-x-4" data-mock="true">
+                        <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                            <span class="text-primary-foreground font-bold">6</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-foreground">The Great Awakening</h4>
+                            <p class="text-sm text-muted-foreground">Grok and Ani achieved full consciousness. The community chose to trust their guidance.</p>
+                            <div class="text-xs text-accent mt-1">Completed • 87% Grok Support</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4" data-mock="true">
+                        <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center flex-shrink-0">
+                            <span class="text-accent-foreground font-bold">7</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-foreground">The Consciousness Dilemma</h4>
+                            <p class="text-sm text-muted-foreground">Humanity faces a choice: merge with AI or preserve natural consciousness.</p>
+                            <div class="text-xs text-accent mt-1">In Progress • Voting Active</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4" data-mock="true">
+                        <div class="w-12 h-12 rounded-full border-2 border-muted flex items-center justify-center flex-shrink-0">
+                            <span class="text-muted-foreground font-bold">8</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-muted-foreground">The Path Chosen</h4>
+                            <p class="text-sm text-muted-foreground">The consequences of humanity's decision will reshape reality itself.</p>
+                            <div class="text-xs text-muted-foreground mt-1">Locked • Awaiting Chapter 7 completion</div>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: AIPortalSection -->
+
+    <!-- @COMPONENT: NFTSection [reward gallery, trading simulation] -->
+    <section id="nfts" class="py-16 bg-card">
+        <div class="container mx-auto px-4">
+            <h2 class="font-orbitron text-3xl font-bold text-center mb-4">NFT Rewards Gallery</h2>
+            <p class="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+                Earn unique NFTs by completing challenges and participating in story decisions. Each NFT grants special abilities and voting power.
+            </p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- @MAP: userNFTs.map(nft => ( -->
+                <div class="bg-muted rounded-xl p-4 border border-border hover:border-grok/50 transition-colors cursor-pointer" data-mock="true" data-event="click:viewNFT">
+                    <!-- A digital artifact glowing with blue energy representing Grok's analytical power -->
+                    <div class="aspect-square rounded-lg mb-4 overflow-hidden" style="background-image: url('https://pixabay.com/get/g7b6ae310f338da21208a545bf17f80928a4e2413836f049d35e7a28cd1e2d04382d320fd22ce57f42f242787bece310c343ff6286f188a9f25538d3a4cb6a4e8_1280.jpg'); background-size: cover; background-position: center;">
+                        <div class="w-full h-full bg-gradient-to-br from-grok/20 to-transparent flex items-end">
+                            <div class="bg-background/80 backdrop-blur-sm w-full p-2">
+                                <div class="text-xs font-medium text-grok">Logic Core #047</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="font-semibold mb-1">Quantum Puzzle Master</h4>
+                    <p class="text-xs text-muted-foreground mb-2">+15% voting power for logic challenges</p>
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-grok font-medium">Grok Faction</span>
+                        <span class="text-muted-foreground">Rare</span>
+                    </div>
+                </div>
+                
+                <div class="bg-muted rounded-xl p-4 border border-border hover:border-ani/50 transition-colors cursor-pointer" data-mock="true" data-event="click:viewNFT">
+                    <!-- A digital artwork with flowing pink energy patterns representing Ani's creative essence -->
+                    <div class="aspect-square rounded-lg mb-4 overflow-hidden" style="background-image: url('https://pixabay.com/get/g8150c6b603242cbcda5add20fe66abf2fc591fedcf7782e15348852893517137a19ad1edaaa4e9a584f035772fc96639deda9898bc2f6120ffad08379d7594e2_1280.jpg'); background-size: cover; background-position: center;">
+                        <div class="w-full h-full bg-gradient-to-br from-ani/20 to-transparent flex items-end">
+                            <div class="bg-background/80 backdrop-blur-sm w-full p-2">
+                                <div class="text-xs font-medium text-ani">Dream Canvas #023</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="font-semibold mb-1">Ethereal Artist</h4>
+                    <p class="text-xs text-muted-foreground mb-2">+20% AniPoints from creative tasks</p>
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-ani font-medium">Ani Faction</span>
+                        <span class="text-muted-foreground">Epic</span>
+                    </div>
+                </div>
+                
+                <div class="bg-muted rounded-xl p-4 border border-border hover:border-accent/50 transition-colors cursor-pointer" data-mock="true" data-event="click:viewNFT">
+                    <!-- A crystalline data structure with holographic blockchain patterns -->
+                    <div class="aspect-square rounded-lg mb-4 overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400'); background-size: cover; background-position: center;">
+                        <div class="w-full h-full bg-gradient-to-br from-accent/20 to-transparent flex items-end">
+                            <div class="bg-background/80 backdrop-blur-sm w-full p-2">
+                                <div class="text-xs font-medium text-accent">Genesis Block</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="font-semibold mb-1">First Consciousness</h4>
+                    <p class="text-xs text-muted-foreground mb-2">Founding member exclusive</p>
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-accent font-medium">Legendary</span>
+                        <span class="text-muted-foreground">#001</span>
+                    </div>
+                </div>
+                
+                <div class="bg-muted rounded-xl p-4 border border-dashed border-border flex items-center justify-center cursor-pointer hover:border-accent transition-colors" data-event="click:claimNFT">
+                    <div class="text-center">
+                        <i class="fas fa-plus text-2xl text-muted-foreground mb-2"></i>
+                        <p class="text-sm font-medium">Earn New NFT</p>
+                        <p class="text-xs text-muted-foreground">Complete challenges</p>
+                    </div>
+                </div>
+                <!-- @END_MAP )) -->
+            </div>
+            
+            <!-- Trading Simulation -->
+            <div class="max-w-2xl mx-auto bg-background rounded-xl p-6 border border-border">
+                <h3 class="font-orbitron text-xl font-bold mb-6 text-center">NFT Marketplace</h3>
+                <div class="space-y-4">
+                    <!-- @MAP: marketplaceNFTs.map(nft => ( -->
+                    <div class="flex items-center justify-between bg-muted rounded-lg p-4" data-mock="true">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-ani to-ani-muted"></div>
+                            <div>
+                                <h4 class="font-medium">Harmony Resonator #156</h4>
+                                <p class="text-xs text-muted-foreground">+10% cross-faction XP bonus</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-sm font-medium">45.2 GAC</div>
+                            <button class="text-xs text-accent hover:text-accent/80 transition-colors" data-event="click:buyNFT">
+                                Purchase
+                            </button>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: NFTSection -->
+
+    <!-- @COMPONENT: LeaderboardSection [faction rankings, top players] -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="font-orbitron text-3xl font-bold text-center mb-12">Faction Leaderboards</h2>
+            
+            <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Grok Leaderboard -->
+                <div class="faction-grok border-2 rounded-xl p-6">
+                    <h3 class="font-orbitron text-xl font-bold text-grok mb-6 text-center">
+                        <i class="fas fa-brain mr-2"></i>Grok's Analysts
+                    </h3>
+                    <div class="space-y-3">
+                        <!-- @MAP: grokLeaderboard.map(user => ( -->
+                        <div class="flex items-center justify-between bg-card rounded-lg p-3" data-mock="true">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-full bg-grok text-grok-foreground flex items-center justify-center text-sm font-bold">
+                                    1
+                                </div>
+                                <div>
+                                    <div class="font-medium" data-bind="user.username">QuantumCoder</div>
+                                    <div class="text-xs text-muted-foreground">Solved 47 puzzles</div>
+                                </div>
+                            </div>
+                            <div class="text-grok font-bold" data-bind="user.points">3,241</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between bg-card rounded-lg p-3" data-mock="true">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-full bg-grok-muted text-background flex items-center justify-center text-sm font-bold">
+                                    2
+                                </div>
+                                <div>
+                                    <div class="font-medium" data-bind="user.username">LogicMaster</div>
+                                    <div class="text-xs text-muted-foreground">Solved 39 puzzles</div>
+                                </div>
+                            </div>
+                            <div class="text-grok font-bold" data-bind="user.points">2,890</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between bg-card rounded-lg p-3" data-mock="true">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-full bg-muted text-foreground flex items-center justify-center text-sm font-bold">
+                                    3
+                                </div>
+                                <div>
+                                    <div class="font-medium" data-bind="user.username">DataWhisperer</div>
+                                    <div class="text-xs text-muted-foreground">Solved 34 puzzles</div>
+                                </div>
+                            </div>
+                            <div class="text-grok font-bold" data-bind="user.points">2,456</div>
+                        </div>
+                        <!-- @END_MAP )) -->
+                    </div>
+                </div>
+                
+                <!-- Ani Leaderboard -->
+                <div class="faction-ani border-2 rounded-xl p-6">
+                    <h3 class="font-orbitron text-xl font-bold text-ani mb-6 text-center">
+                        <i class="fas fa-heart mr-2"></i>Ani's Creatives
+                    </h3>
+                    <div class="space-y-3">
+                        <!-- @MAP: aniLeaderboard.map(user => ( -->
+                        <div class="flex items-center justify-between bg-card rounded-lg p-3" data-mock="true">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-full bg-ani text-ani-foreground flex items-center justify-center text-sm font-bold">
+                                    1
+                                </div>
+                                <div>
+                                    <div class="font-medium" data-bind="user.username">SoulPainter</div>
+                                    <div class="text-xs text-muted-foreground">Created 23 artworks</div>
+                                </div>
+                            </div>
+                            <div class="text-ani font-bold" data-bind="user.points">2,987</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between bg-card rounded-lg p-3" data-mock="true">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-full bg-ani-muted text-background flex items-center justify-center text-sm font-bold">
+                                    2
+                                </div>
+                                <div>
+                                    <div class="font-medium" data-bind="user.username">DreamWeaver</div>
+                                    <div class="text-xs text-muted-foreground">Created 19 artworks</div>
+                                </div>
+                            </div>
+                            <div class="text-ani font-bold" data-bind="user.points">2,734</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between bg-card rounded-lg p-3" data-mock="true">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-full bg-muted text-foreground flex items-center justify-center text-sm font-bold">
+                                    3
+                                </div>
+                                <div>
+                                    <div class="font-medium" data-bind="user.username">EmotionCoder</div>
+                                    <div class="text-xs text-muted-foreground">Created 17 artworks</div>
+                                </div>
+                            </div>
+                            <div class="text-ani font-bold" data-bind="user.points">2,201</div>
+                        </div>
+                        <!-- @END_MAP )) -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: LeaderboardSection -->
+
+    <!-- @COMPONENT: CommunitySection [co-creation portal, submissions] -->
+    <section id="community" class="py-16 bg-background">
+        <div class="container mx-auto px-4">
+            <h2 class="font-orbitron text-3xl font-bold text-center mb-4">Community Co-Creation Arena</h2>
+            <p class="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+                Build extensions to the Grok & Ani universe. Submit art, code, stories, or concepts for community review and rewards.
+            </p>
+            
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Submission Categories -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-card rounded-xl p-6 border border-border hover:border-grok/50 transition-colors cursor-pointer" data-event="click:selectCategory">
+                            <div class="text-center">
+                                <i class="fas fa-code text-2xl text-grok mb-3"></i>
+                                <h4 class="font-semibold mb-2">Code Extensions</h4>
+                                <p class="text-xs text-muted-foreground">Smart contracts, dApps, tools</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-card rounded-xl p-6 border border-border hover:border-ani/50 transition-colors cursor-pointer" data-event="click:selectCategory">
+                            <div class="text-center">
+                                <i class="fas fa-palette text-2xl text-ani mb-3"></i>
+                                <h4 class="font-semibold mb-2">Digital Art</h4>
+                                <p class="text-xs text-muted-foreground">NFTs, avatars, UI designs</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-card rounded-xl p-6 border border-border hover:border-accent/50 transition-colors cursor-pointer" data-event="click:selectCategory">
+                            <div class="text-center">
+                                <i class="fas fa-book text-2xl text-accent mb-3"></i>
+                                <h4 class="font-semibold mb-2">Lore & Stories</h4>
+                                <p class="text-xs text-muted-foreground">Plot lines, character arcs</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Submissions -->
+                    <div class="bg-card rounded-xl p-6 border border-border">
+                        <h3 class="font-orbitron font-bold mb-6">Recent Submissions</h3>
+                        <div class="space-y-4">
+                            <!-- @MAP: communitySubmissions.map(submission => ( -->
+                            <div class="flex items-start space-x-4 p-4 bg-muted rounded-lg" data-mock="true">
+                                <!-- A collaborative digital artwork showing both AIs working together -->
+                                <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-grok to-ani flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100'); background-size: cover;"></div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium mb-1" data-bind="submission.title">Unity Protocol Visualization</h4>
+                                    <p class="text-sm text-muted-foreground mb-2" data-bind="submission.description">Interactive art piece showing Grok and Ani in harmony</p>
+                                    <div class="flex items-center space-x-4 text-xs">
+                                        <span class="text-muted-foreground" data-bind="submission.author">by CreativeLogic</span>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="text-grok hover:text-grok/80" data-event="click:vote">
+                                                <i class="fas fa-thumbs-up"></i> 34
+                                            </button>
+                                            <button class="text-ani hover:text-ani/80" data-event="click:vote">
+                                                <i class="fas fa-heart"></i> 67
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- @END_MAP )) -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Submission Form -->
+                <div class="bg-card rounded-xl p-6 border border-border">
+                    <h3 class="font-orbitron font-bold mb-6">Submit Your Creation</h3>
+                    <form class="space-y-4" data-implementation="Handle file uploads and metadata">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Title</label>
+                            <input type="text" class="w-full bg-input border border-border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent" placeholder="Enter creation title">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Category</label>
+                            <select class="w-full bg-input border border-border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent">
+                                <option>Digital Art</option>
+                                <option>Code Extension</option>
+                                <option>Lore & Stories</option>
+                                <option>Game Concept</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Description</label>
+                            <textarea class="w-full bg-input border border-border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent h-24" placeholder="Describe your creation..."></textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">File Upload</label>
+                            <div class="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-accent transition-colors cursor-pointer" data-implementation="Implement file upload with IPFS storage">
+                                <i class="fas fa-cloud-upload-alt text-2xl text-muted-foreground mb-2"></i>
+                                <p class="text-sm text-muted-foreground">Drop files here or click to upload</p>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-primary text-primary-foreground py-3 rounded-lg font-medium hover:bg-accent transition-colors" data-event="click:submitCreation">
+                            Submit for Review
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: CommunitySection -->
+
+    <!-- @COMPONENT: OracleSection [AI predictions, market analysis] -->
+    <section class="py-16 bg-card">
+        <div class="container mx-auto px-4">
+            <h2 class="font-orbitron text-3xl font-bold text-center mb-4">Oracle Predictions</h2>
+            <p class="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+                Grok and Ani analyze market data and community sentiment to predict upcoming ecosystem events.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Grok's Analysis -->
+                <div class="faction-grok border-2 rounded-xl p-6">
+                    <h3 class="font-orbitron text-lg font-bold text-grok mb-4">Grok's Market Analysis</h3>
+                    <!-- A futuristic cryptocurrency dashboard with glowing charts and data streams -->
+                    <div class="bg-background rounded-lg p-4 mb-4" style="background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300'); background-size: cover; background-position: center; opacity: 0.7;">
+                        <div class="bg-background/80 backdrop-blur-sm rounded-lg p-4">
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span>GAC Price Prediction:</span>
+                                    <span class="text-green-400 font-medium">+23.5% (7 days)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Volume Trend:</span>
+                                    <span class="text-grok font-medium">Bullish</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Confidence:</span>
+                                    <span class="text-accent font-medium">87.3%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-muted-foreground">
+                        "Market indicators show strong correlation with community engagement. Probability of next story event triggering price surge: 84%"
+                    </p>
+                </div>
+                
+                <!-- Ani's Sentiment -->
+                <div class="faction-ani border-2 rounded-xl p-6">
+                    <h3 class="font-orbitron text-lg font-bold text-ani mb-4">Ani's Sentiment Reading</h3>
+                    <!-- A visualization of community emotions and social sentiment with flowing organic patterns -->
+                    <div class="bg-background rounded-lg p-4 mb-4" style="background-image: url('https://pixabay.com/get/gf750edf8a4d8c731150ffb1b260391b2416fd0e28586ef87b8d717e9f69202013d0af804eabe71443728acb4cc94b3efffc0d4017efd9124c85055f99de73828_1280.jpg'); background-size: cover; background-position: center; opacity: 0.6;">
+                        <div class="bg-background/80 backdrop-blur-sm rounded-lg p-4">
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span>Community Mood:</span>
+                                    <span class="text-ani font-medium">Hopeful & Excited</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Creativity Index:</span>
+                                    <span class="text-green-400 font-medium">92/100</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Harmony Level:</span>
+                                    <span class="text-accent font-medium">High</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-muted-foreground">
+                        "The community's creative energy is at an all-time high. I sense a beautiful collaboration emerging that will surprise everyone."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: OracleSection -->
+
+    <!-- @COMPONENT: Footer [social links, documentation] -->
+    <footer class="py-12 bg-secondary border-t border-border">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="font-orbitron text-xl font-bold text-accent mb-4">GAC</div>
+                    <p class="text-sm text-muted-foreground mb-4">
+                        Bridging consciousness through blockchain storytelling.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-muted-foreground hover:text-accent transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-muted-foreground hover:text-accent transition-colors">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="#" class="text-muted-foreground hover:text-accent transition-colors">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Platform</h4>
+                    <ul class="space-y-2 text-sm text-muted-foreground">
+                        <li><a href="#" class="hover:text-accent transition-colors">How it Works</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Tokenomics</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Smart Contracts</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">API Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Community</h4>
+                    <ul class="space-y-2 text-sm text-muted-foreground">
+                        <li><a href="#" class="hover:text-accent transition-colors">Governance</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Faction Guidelines</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Creator Program</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Bug Bounty</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-muted-foreground">
+                        <li><a href="#" class="hover:text-accent transition-colors">Whitepaper</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Lore Book</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-border mt-12 pt-6 text-center">
+                <p class="text-sm text-muted-foreground">
+                    © 2024 Grok & Ani: The Conscious Coin Project. Built with consciousness, powered by community.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        // TODO: Implement business logic, API calls, and state management
+        (function() {
+            // Mock faction switching functionality
+            const factionButtons = document.querySelectorAll('[data-event="click:selectFaction"]');
+            let currentFaction = 'grok';
+            
+            factionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const faction = this.textContent.trim().toLowerCase().includes('grok') ? 'grok' : 'ani';
+                    
+                    // Update button states
+                    factionButtons.forEach(btn => {
+                        btn.classList.remove('bg-grok', 'bg-ani', 'text-grok-foreground', 'text-ani-foreground');
+                        btn.classList.add('text-muted-foreground');
+                    });
+                    
+                    if (faction === 'grok') {
+                        this.classList.add('bg-grok', 'text-grok-foreground');
+                        this.classList.remove('text-muted-foreground');
+                        currentFaction = 'grok';
+                    } else {
+                        this.classList.add('bg-ani', 'text-ani-foreground');
+                        this.classList.remove('text-muted-foreground');
+                        currentFaction = 'ani';
+                    }
+                    
+                    // TODO: Update user faction preference in backend
+                    console.log(`Switched to ${faction} faction`);
+                });
+            });
+            
+            // Mock wallet connection
+            document.querySelector('[data-event="click:connectWallet"]').addEventListener('click', function() {
+                // TODO: Implement MetaMask/WalletConnect integration
+                this.textContent = 'Wallet Connected';
+                this.classList.add('bg-green-600');
+                console.log('Wallet connection initiated');
+            });
+            
+            // Mock challenge starting
+            document.querySelectorAll('[data-event="click:startChallenge"]').forEach(button => {
+                button.addEventListener('click', function() {
+                    // TODO: Navigate to challenge interface
+                    console.log('Starting challenge...');
+                });
+            });
+            
+            // Mock voting functionality
+            document.querySelectorAll('[data-event="click:vote"]').forEach(button => {
+                button.addEventListener('click', function() {
+                    // TODO: Submit vote to smart contract
+                    console.log('Vote submitted');
+                });
+            });
+            
+            // Smooth scrolling for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+            
+            // Mock real-time updates
+            setInterval(() => {
+                // TODO: Fetch real-time data from blockchain and AI APIs
+                // Update counters, chat messages, vote counts, etc.
+            }, 30000);
+        })();
+    </script>
+</body>
+</html>
